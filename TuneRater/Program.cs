@@ -1,6 +1,8 @@
-﻿string mensagemDeBoasVindas = "Bem-vinde ao TuneRater";
-List<string> listaDeBandas = new List<string>();
-List<string> listaDeCantores = new List<string>();
+﻿string mensagemDeBoasVindas = "Bem-vinde ao TuneRater!";
+//List<string> listaDeBandas = new List<string>();
+//List<string> listaDeCantores = new List<string>();
+Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
+Dictionary<string, List<int>> registroDeCantores = new Dictionary<string, List<int>>();
 
 
 void ExibirLogo()
@@ -29,11 +31,12 @@ void ExibirOpcoesDoMenu()
     Console.WriteLine("\nDigite 1 para registrar uma banda");
     Console.WriteLine("Digite 2 para exibir todas as bandas");
     Console.WriteLine("Digite 3 para avaliar uma banda");
-    Console.WriteLine("Digite 4 para registrar um cantor(a)");
-    Console.WriteLine("Digite 5 para exibir todos cantores");
-    Console.WriteLine("Digite 6 para avaliar um(a) cantor(a)");
-    Console.WriteLine("Digite 7 para exibir a média de uma banda");
-    Console.WriteLine("Digite 8 para exibir todas as bandas e cantores");
+    Console.WriteLine("Digite 4 para exebir uma média de uma banda");
+    Console.WriteLine("Digite 5 para registrar um cantor(a)");
+    Console.WriteLine("Digite 6 para exibir todos cantores");
+    Console.WriteLine("Digite 7 para avaliar um(a) cantor(a)");
+    Console.WriteLine("Digite 8 para exibir a média de um cantor");
+    Console.WriteLine("Digite 9 para exibir todas as bandas e cantores");
     Console.WriteLine("Digite -1 para sair");
 
     Console.Write("\nDigite a sua opção: ");
@@ -48,21 +51,24 @@ void ExibirOpcoesDoMenu()
             MostrarBandas();
             break;
         case 3:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            AvaliarUmaBanda();
             break;
         case 4:
-            RegistrarCantores();
+            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
             break;
         case 5:
-            MostrarCantores();
+            RegistrarCantores();
             break;
         case 6:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            MostrarCantores();
             break;
         case 7:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            AvaliarCantor();
             break;
         case 8:
+            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            break;
+        case 9:
             MostrarBandasECantores();
             break;
         case -1:
@@ -84,7 +90,7 @@ void RegistrarBandas()
     Console.WriteLine(" ");
     Console.Write("Digite o nome da banda que deseja registrar: ");
     string nomeDaBanda = Console.ReadLine()!;
-    listaDeBandas.Add(nomeDaBanda);
+    bandasRegistradas.Add(nomeDaBanda, new List<int>());
     Console.WriteLine("A banda {0} foi registrada com sucesso!", nomeDaBanda);
     Thread.Sleep(2000);
     Console.Clear();
@@ -101,7 +107,7 @@ void RegistrarCantores()
     Console.WriteLine(" ");
     Console.Write("Digite o nome do(a) cantor(a) que deseja registrar: ");
     string nomeDeCantor = Console.ReadLine()!;
-    listaDeCantores.Add(nomeDeCantor);
+    registroDeCantores.Add(nomeDeCantor, new List<int>());
     Console.WriteLine("{0} foi registrade com sucesso!", nomeDeCantor);
     Thread.Sleep(2000);
     Console.Clear();
@@ -116,7 +122,7 @@ void MostrarBandas()
 █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█ █▀
 █▄█ █▀█ █░▀█ █▄▀ █▀█ ▄█");
     Console.WriteLine(" ");
-    foreach (string banda in listaDeBandas)
+    foreach (string banda in bandasRegistradas.Keys)
     {
         Console.WriteLine(banda);
     }
@@ -134,9 +140,9 @@ void MostrarCantores()
 █▀▀ ▄▀█ █▄░█ ▀█▀ █▀█ █▀█ █▀▀ █▀
 █▄▄ █▀█ █░▀█ ░█░ █▄█ █▀▄ ██▄ ▄█");
     Console.WriteLine(" ");
-    for (int i = 0; i < listaDeCantores.Count; i++)
+    foreach (string cantor in registroDeCantores.Keys)
     {
-        Console.WriteLine(listaDeCantores[i]);
+        Console.WriteLine(cantor);
     }
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
@@ -152,7 +158,7 @@ void MostrarBandasECantores()
 █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█ █▀
 █▄█ █▀█ █░▀█ █▄▀ █▀█ ▄█");
     Console.WriteLine(" ");
-    foreach (string banda in listaDeBandas)
+    foreach (string banda in bandasRegistradas.Keys)
     {
         Console.WriteLine(banda);
     }
@@ -161,9 +167,9 @@ void MostrarBandasECantores()
 █▀▀ ▄▀█ █▄░█ ▀█▀ █▀█ █▀█ █▀▀ █▀
 █▄▄ █▀█ █░▀█ ░█░ █▄█ █▀▄ ██▄ ▄█");
     Console.WriteLine(" ");
-    for (int i = 0; i < listaDeCantores.Count; i++)
+    foreach (string banda in registroDeCantores.Keys)
     {
-        Console.WriteLine(listaDeCantores[i]);
+        Console.WriteLine(banda);
     }
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
@@ -172,5 +178,23 @@ void MostrarBandasECantores()
 
 }
 
+void AvaliarUmaBanda()
+{
+    Console.Clear();
+    Console.WriteLine(@"
+▄▀█ █░█ ▄▀█ █░░ █ █▀▀   █░█ █▀▄▀█ ▄▀█   █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█
+█▀█ ▀▄▀ █▀█ █▄▄ █ ██▄   █▄█ █░▀░█ █▀█   █▄█ █▀█ █░▀█ █▄▀ █▀█");
+    Console.WriteLine(" ");
 
+}
+
+void AvaliarCantor()
+{
+    Console.Clear();
+    Console.WriteLine(@"
+▄▀█ █░█ ▄▀█ █░░ █ █▀▀   █░█ █▀▄▀█ ▄▀ ▄▀█ ▀▄   █▀▀ ▄▀█ █▄░█ ▀█▀ █▀█ █▀█ ▄▀ ▄▀█ ▀▄
+█▀█ ▀▄▀ █▀█ █▄▄ █ ██▄   █▄█ █░▀░█ ▀▄ █▀█ ▄▀   █▄▄ █▀█ █░▀█ ░█░ █▄█ █▀▄ ▀▄ █▀█ ▄▀");
+    Console.WriteLine(" ");
+
+}
 ExibirOpcoesDoMenu();
