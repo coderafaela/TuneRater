@@ -1,8 +1,6 @@
 ﻿string mensagemDeBoasVindas = "Bem-vinde ao TuneRater!";
-//List<string> listaDeBandas = new List<string>();
-//List<string> listaDeCantores = new List<string>();
-Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
-Dictionary<string, List<int>> registroDeCantores = new Dictionary<string, List<int>>();
+Dictionary<string, List<double>> bandasRegistradas = new Dictionary<string, List<double>>();
+Dictionary<string, List<double>> registroDeCantores = new Dictionary<string, List<double>>();
 
 
 void ExibirLogo()
@@ -31,7 +29,7 @@ void ExibirOpcoesDoMenu()
     Console.WriteLine("\nDigite 1 para registrar uma banda");
     Console.WriteLine("Digite 2 para exibir todas as bandas");
     Console.WriteLine("Digite 3 para avaliar uma banda");
-    Console.WriteLine("Digite 4 para exebir uma média de uma banda");
+    Console.WriteLine("Digite 4 para exibir uma média de uma banda");
     Console.WriteLine("Digite 5 para registrar um cantor(a)");
     Console.WriteLine("Digite 6 para exibir todos cantores");
     Console.WriteLine("Digite 7 para avaliar um(a) cantor(a)");
@@ -54,7 +52,7 @@ void ExibirOpcoesDoMenu()
             AvaliarUmaBanda();
             break;
         case 4:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            MediaBanda();
             break;
         case 5:
             RegistrarCantores();
@@ -66,7 +64,7 @@ void ExibirOpcoesDoMenu()
             AvaliarCantor();
             break;
         case 8:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNum);
+            MediaCantor();
             break;
         case 9:
             MostrarBandasECantores();
@@ -90,12 +88,14 @@ void RegistrarBandas()
     Console.WriteLine(" ");
     Console.Write("Digite o nome da banda que deseja registrar: ");
     string nomeDaBanda = Console.ReadLine()!;
-    bandasRegistradas.Add(nomeDaBanda, new List<int>());
+    bandasRegistradas.Add(nomeDaBanda, new List<double>());
     Console.WriteLine("A banda {0} foi registrada com sucesso!", nomeDaBanda);
-    Thread.Sleep(5000);
+    Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
+    Console.ReadKey();
     Console.Clear();
     ExibirLogo();
     ExibirOpcoesDoMenu();
+
 
 }
 
@@ -108,12 +108,14 @@ void RegistrarCantores()
     Console.WriteLine(" ");
     Console.Write("Digite o nome do(a) cantor(a) que deseja registrar: ");
     string nomeDeCantor = Console.ReadLine()!;
-    registroDeCantores.Add(nomeDeCantor, new List<int>());
+    registroDeCantores.Add(nomeDeCantor, new List<double>());
     Console.WriteLine("{0} foi registrade com sucesso!", nomeDeCantor);
-    Thread.Sleep(5000);
+    Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
+    Console.ReadKey();
     Console.Clear();
     ExibirLogo();
     ExibirOpcoesDoMenu();
+
 
 }
 
@@ -195,7 +197,7 @@ void AvaliarUmaBanda()
     if (bandasRegistradas.ContainsKey(nomeBanda))
     {
         Console.Write($"Digite a nota que deseja dar para a banda {nomeBanda}: ");
-        int notaBanda = int.Parse(Console.ReadLine()!);
+        double notaBanda = double.Parse(Console.ReadLine()!);
         bandasRegistradas[nomeBanda].Add(notaBanda);
         Console.WriteLine($"\nA nota {notaBanda} foi registrada com sucesso para a banda {nomeBanda}!");
         Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
@@ -226,7 +228,7 @@ void AvaliarCantor()
     if (registroDeCantores.ContainsKey(nomeCantor))
     {
         Console.Write($"Digite a nota que deseja dar para o(a) cantor(a) {nomeCantor}: ");
-        int notaCantor= int.Parse(Console.ReadLine()!);
+        double notaCantor = double.Parse(Console.ReadLine()!);
         registroDeCantores[nomeCantor].Add(notaCantor);
         Console.WriteLine($"\nA nota {notaCantor} foi registrada com sucesso para o(a) cantor(a) {nomeCantor}!");
         Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
@@ -243,5 +245,68 @@ void AvaliarCantor()
         ExibirOpcoesDoMenu();
     }
 }
+
+void MediaBanda()
+{
+    Console.Clear();
+    Console.WriteLine(@"
+█▀▄ █▀▀ █▀ █▀▀ █░█ █▄▄ █▀█ ▄▀█   ▄▀█   █▀▄▀█ █▀▀ █▀▄ █ ▄▀█   █▀▄ ▄▀█   █▀ █░█ ▄▀█   █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█
+█▄▀ ██▄ ▄█ █▄▄ █▄█ █▄█ █▀▄ █▀█   █▀█   █░▀░█ ██▄ █▄▀ █ █▀█   █▄▀ █▀█   ▄█ █▄█ █▀█   █▄█ █▀█ █░▀█ █▄▀ █▀█
+
+█▀█ █▀▀ █▀▀ █ █▀ ▀█▀ █▀█ ▄▀█ █▀▄ ▄▀█
+█▀▄ ██▄ █▄█ █ ▄█ ░█░ █▀▄ █▀█ █▄▀ █▀█");
+    Console.WriteLine(" ");
+    Console.Write("Digite o nome da banda que deseja ver nota média em avaliações feitas: ");
+    string nomeBanda = Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(nomeBanda))
+    {
+      List<double> notasDaBanda = bandasRegistradas[nomeBanda];
+      Console.WriteLine($"\nA média de avaliações da banda {nomeBanda} é: {notasDaBanda.Average()}");
+      Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
+      Console.ReadKey();
+      Console.Clear();
+      ExibirLogo();
+      ExibirOpcoesDoMenu();
+    } else {
+      Console.WriteLine($"\nOps, a banda {nomeBanda} não foi encontrada. Verifique se digitou o nome corretamente.");
+      Console.WriteLine("Digite uma tecla para voltar ao menu: ");
+      Console.ReadKey();
+      Console.Clear();
+      ExibirLogo();
+      ExibirOpcoesDoMenu();
+    }
+}
+
+void MediaCantor()
+{
+    Console.Clear();
+    Console.WriteLine(@"
+█▀▄ █▀▀ █▀ █▀▀ █░█ █▄▄ █▀█ ▄▀█   ▄▀█   █▀▄▀█ █▀▀ █▀▄ █ ▄▀█   █▀▄ █▀▀   █░█ █▀▄▀█ ▄▀ ▄▀█ ▀▄
+█▄▀ ██▄ ▄█ █▄▄ █▄█ █▄█ █▀▄ █▀█   █▀█   █░▀░█ ██▄ █▄▀ █ █▀█   █▄▀ ██▄   █▄█ █░▀░█ ▀▄ █▀█ ▄▀
+
+█▀▀ ▄▀█ █▄░█ ▀█▀ █▀█ █▀█ ▄▀ ▄▀█ ▀▄   █▀█ █▀▀ █▀▀ █ █▀ ▀█▀ █▀█ ▄▀█ █▀▄ █▀█ ▄▀ ▄▀█ ▀▄
+█▄▄ █▀█ █░▀█ ░█░ █▄█ █▀▄ ▀▄ █▀█ ▄▀   █▀▄ ██▄ █▄█ █ ▄█ ░█░ █▀▄ █▀█ █▄▀ █▄█ ▀▄ █▀█ ▄▀");
+    Console.WriteLine(" ");
+    Console.Write("Digite o nome do(a) cantor(a) que deseja ver nota média em avaliações feitas: ");
+    string nomeCantor = Console.ReadLine()!;
+    if (registroDeCantores.ContainsKey(nomeCantor))
+    {
+        List<double> notasDeCantores = registroDeCantores[nomeCantor];
+        Console.WriteLine($"\nA média de avaliações do(a) cantor(a) {nomeCantor} é: {notasDeCantores.Average()}");
+        Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirLogo();
+        ExibirOpcoesDoMenu();
+    } else {
+        Console.WriteLine($"\nOps,o nome do(a) cantor(a) {nomeCantor} não foi encontrado. Verifique se digitou o nome corretamente.");
+        Console.WriteLine("Digite uma tecla para voltar ao menu: ");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirLogo();
+        ExibirOpcoesDoMenu();
+    }
+}
+
 ExibirLogo();
 ExibirOpcoesDoMenu();
