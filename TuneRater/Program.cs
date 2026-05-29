@@ -1,5 +1,4 @@
-﻿string mensagemDeBoasVindas = "Bem-vinde ao TuneRater!";
-Dictionary<string, List<double>> bandasRegistradas = new Dictionary<string, List<double>>();
+﻿Dictionary<string, List<double>> bandasRegistradas = new Dictionary<string, List<double>>();
 Dictionary<string, List<double>> registroDeCantores = new Dictionary<string, List<double>>();
 
 
@@ -21,7 +20,7 @@ void ExibirLogo()
 █░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
 █░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█
 ");
-    Console.WriteLine(mensagemDeBoasVindas);
+    Console.WriteLine("Bem-vinde ao TuneRater");
 }
 void ExibirOpcoesDoMenu()
 {
@@ -93,7 +92,6 @@ void RegistrarBandas()
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
     Console.Clear();
-    ExibirLogo();
     ExibirOpcoesDoMenu();
 
 
@@ -113,7 +111,6 @@ void RegistrarCantores()
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
     Console.Clear();
-    ExibirLogo();
     ExibirOpcoesDoMenu();
 
 
@@ -133,7 +130,6 @@ void MostrarBandas()
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
     Console.Clear();
-    ExibirLogo();
     ExibirOpcoesDoMenu();
 
 
@@ -152,7 +148,6 @@ void MostrarCantores()
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
     Console.Clear();
-    ExibirLogo();
     ExibirOpcoesDoMenu();
 
 
@@ -180,7 +175,6 @@ void MostrarBandasECantores()
     Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
     Console.ReadKey();
     Console.Clear();
-    ExibirLogo();
     ExibirOpcoesDoMenu();
 
 }
@@ -203,14 +197,12 @@ void AvaliarUmaBanda()
         Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     } else {
         Console.WriteLine($"\nOps, a banda {nomeBanda} não foi encontrada. Verifique se digitou o nome corretamente.");
         Console.WriteLine("Digite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     }
    
@@ -234,14 +226,12 @@ void AvaliarCantor()
         Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     } else {
         Console.WriteLine($"\nOps, o(a) cantor(a) {nomeCantor} não foi encontrado(a). Verifique se digitou o nome corretamente.");
         Console.WriteLine("Digite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     }
 }
@@ -265,14 +255,12 @@ void MediaBanda()
       Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
       Console.ReadKey();
       Console.Clear();
-      ExibirLogo();
       ExibirOpcoesDoMenu();
     } else {
       Console.WriteLine($"\nOps, a banda {nomeBanda} não foi encontrada. Verifique se digitou o nome corretamente.");
       Console.WriteLine("Digite uma tecla para voltar ao menu: ");
       Console.ReadKey();
       Console.Clear();
-      ExibirLogo();
       ExibirOpcoesDoMenu();
     }
 }
@@ -296,17 +284,14 @@ void MediaCantor()
         Console.WriteLine("\nDigite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     } else {
         Console.WriteLine($"\nOps,o nome do(a) cantor(a) {nomeCantor} não foi encontrado. Verifique se digitou o nome corretamente.");
         Console.WriteLine("Digite uma tecla para voltar ao menu: ");
         Console.ReadKey();
         Console.Clear();
-        ExibirLogo();
         ExibirOpcoesDoMenu();
     }
 }
 
-ExibirLogo();
 ExibirOpcoesDoMenu();
