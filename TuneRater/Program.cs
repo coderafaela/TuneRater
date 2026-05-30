@@ -70,6 +70,7 @@ void ExibirOpcoesDoMenu()
             break;
         case -1:
             Console.WriteLine("Bye bye, bitch");
+            Environment.Exit(0);
             break;
         default:
             Console.WriteLine("Opção Inválida");
@@ -293,5 +294,6 @@ void MediaCantor()
         ExibirOpcoesDoMenu();
     }
 }
+
 
 ExibirOpcoesDoMenu();
